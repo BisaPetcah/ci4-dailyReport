@@ -1,0 +1,29 @@
+<?php
+
+
+namespace App\Controllers\Pembimbing;
+
+
+class Absensi extends \App\Controllers\BaseController
+{
+    protected $data;
+
+    /**
+     * Absensi constructor.
+     */
+    public function __construct()
+    {
+        $this->data = array(
+            'page' => 'Absensi',
+            'name' => 'Arief Yusuf Winata',
+            'photoProfile' => '/images/faces/face3.jpg',
+            'role' => 'pembimbing'
+        );
+    }
+
+    public function index()
+    {
+        $this->data['title'] = 'Absensi';
+        return view('pembimbing/absensi/index', $this->data);
+    }
+}
