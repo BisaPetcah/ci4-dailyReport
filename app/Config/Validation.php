@@ -57,8 +57,8 @@ class Validation
             'rules' => 'required|alpha_space',
             'errors' => [
                 'required' => '{field} harus diisi',
-                'alpha_space' => '{field} harus huruf dan spasi'
-            ]
+                'alpha_space' => '{field} harus huruf dan spasi',
+            ],
         ],
         'email' => [
             'label' => 'Email',
@@ -67,7 +67,7 @@ class Validation
                 'required' => '{field} harus diisi',
                 'is_unique' => '{field} sudah ada',
                 'valid_email' => 'Format email tidak sesuai',
-            ]
+            ],
         ],
         'password' => [
             'label' => 'Password',
@@ -75,7 +75,7 @@ class Validation
             'errors' => [
                 'required' => '{field} harus diisi',
                 'min_length' => '{field} harus {param} karakter',
-            ]
+            ],
         ],
         'pass_confirm' => [
             'label' => 'Konfirmasi Password',
@@ -83,21 +83,21 @@ class Validation
             'errors' => [
                 'required' => '{field} harus diisi',
                 'matches' => '{field} tidak sama dengan {param}',
-            ]
+            ],
         ],
         'jenis_kelamin' => [
             'label' => 'Jenis kelamin',
             'rules' => 'required',
             'errors' => [
                 'required' => '{field} harus dipilih',
-            ]
+            ],
         ],
         'alamat' => [
             'label' => 'Alamat',
             'rules' => 'required',
             'errors' => [
                 'required' => '{field} harus diisi',
-            ]
+            ],
         ],
         'noHp' => [
             'label' => 'No HP',
@@ -106,8 +106,8 @@ class Validation
                 'required' => '{field} harus diisi',
                 'numeric' => '{field} harus angka',
                 'min_length' => '{field} harus {param} karakter',
-                'regex_match' => 'format {field} tidak sesuai'
-            ]
+                'regex_match' => 'format {field} tidak sesuai',
+            ],
         ],
 //        'foto_profile' => [
 //            'label' => 'Foto profile',
@@ -119,8 +119,26 @@ class Validation
         'konfirmasi' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'Harap ceklis untuk melanjutkan'
-            ]
-        ]
+                'required' => 'Harap ceklis untuk melanjutkan',
+            ],
+        ],
+    ];
+
+    public $masuk = [
+        'username' => [
+            'rules' => 'required|is_not_unique[m_user.user_email]|valid_email',
+            'label' => 'Email',
+            'errors' => [
+                'required' => 'Harap masukkan {field}',
+                'is_not_unique' => '{field} tidak terdaftar',
+            ],
+        ],
+        'password' => [
+            'rules' => 'required',
+            'label' => 'Password',
+            'errors' => [
+                'required' => 'Harap masukkan {field}',
+            ],
+        ],
     ];
 }

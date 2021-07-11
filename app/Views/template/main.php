@@ -1,9 +1,12 @@
+<?php
+$role = session()->get('role_name');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>Daily Report | <?= isset($title) ? $title : '' ?></title>
+    <title>Daily Report | <?=isset($title) ? $title : ''?></title>
     <link rel="stylesheet" href="/vendors/feather/feather.css"/>
     <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css"/>
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css"/>
@@ -12,18 +15,18 @@
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css"/>
     <link rel="shortcut icon" href="/images/favicon.png"/>
     <?php if (!empty($css)) {
-        foreach ($css as $c) {
-            echo '<link rel="stylesheet" href="' . $c . '">';
-        }
-    } ?>
+    foreach ($css as $c) {
+        echo '<link rel="stylesheet" href="' . $c . '">';
+    }
+}?>
 </head>
 <body>
 <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="/<?= $role ?>"><img src="/images/logo.png" class="mr-2"
+            <a class="navbar-brand brand-logo" href="/<?=$role?>"><img src="/images/logo.png" class="mr-2"
                                                                          alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href="/<?= $role ?>"><img src="/images/logo.png" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="/<?=$role?>"><img src="/images/logo.png" alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <ul class="navbar-nav" style="margin-left: auto">
@@ -46,13 +49,13 @@
 
     <div class="container-fluid page-body-wrapper">
 
-        <?= $this->include('template/navbar') ?>
+        <?=$this->include('template/navbar')?>
 
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col">
-                        <?= $this->renderSection('content') ?>
+                        <?=$this->renderSection('content')?>
                     </div>
                 </div>
             </div>
@@ -75,6 +78,6 @@
     foreach ($js as $j) {
         echo '<script src="' . $j . '"></script>';
     }
-} ?>
+}?>
 </body>
 </html>

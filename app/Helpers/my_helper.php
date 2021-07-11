@@ -15,3 +15,10 @@ function role($id)
     }
     return $roleName;
 }
+
+function isLogin()
+{
+    $session = session();
+    $login = $session->get('login');
+    return $session->get();
+}

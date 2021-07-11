@@ -6,16 +6,36 @@ class Auth extends BaseController
 {
     public function index()
     {
+        $data = array(
+            'validation' => $this->validation,
+        );
+        return view('login', $data);
+    }
+
+    public function proses_login()
+    {
         $post = $this->request->getVar();
+
+        if (!$this->validate($this->validation->getRuleGroup('masuk'))) {
+            return redirect()->to('/')->withInput()->with('validation', $this->validation);
+        }
+
         if (isset($post['masuk'])) {
             $user = $this->userModel->getUser($post['username']);
             if ($user) {
                 if ($post['password'] == $user['user_password']) {
-                    return redirect()->to('/admin');
+                    $data = array(
+                        'user_id' => $user['user_id'],
+                        'profile_name' => $user['profile_nama'],
+                        'role_name' => role($user['user_roleid']),
+                        'profile_foto' => $user['profile_foto'],
+                        'login' => true,
+                    );
+                    session()->set($data);
+                    return redirect()->to('/' . $data['role_name']);
                 }
             }
         }
-        return view('login');
     }
 
     public function registerAdmin()
@@ -54,9 +74,9 @@ class Auth extends BaseController
         }
     }
 
-    public
-    function logout()
+    public function logout()
     {
+        session()->destroy();
         return redirect()->to('/');
     }
 }

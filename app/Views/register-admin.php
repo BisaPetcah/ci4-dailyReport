@@ -29,6 +29,7 @@
                         <h4>Registrasi Admin</h4>
                         <!-- Awal Form Register -->
                         <form method="POST" enctype="multipart/form-data" class="pt-3">
+			<?= csrf_field() ?>
                             <div class="form-group">
                                 <input type="text"
                                        class="form-control form-control-lg <?= $validation->hasError('nama') ? 'is-invalid' : '' ?>"

@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Controllers\Pembimbing;
 
-
 class Absensi extends \App\Controllers\BaseController
+
 {
     protected $data;
 
@@ -13,12 +12,7 @@ class Absensi extends \App\Controllers\BaseController
      */
     public function __construct()
     {
-        $this->data = array(
-            'page' => 'Absensi',
-            'name' => 'Arief Yusuf Winata',
-            'photoProfile' => '/images/faces/face3.jpg',
-            'role' => 'pembimbing'
-        );
+        $this->data['page'] = 'Absensi';
     }
 
     public function index()

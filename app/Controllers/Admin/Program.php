@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Controllers\Admin;
 
-
 class Program extends \App\Controllers\BaseController
+
 {
     protected $data;
 
@@ -13,12 +12,7 @@ class Program extends \App\Controllers\BaseController
      */
     public function __construct()
     {
-        $this->data = array(
-            'page' => 'Program',
-            'name' => 'Arief Yusuf Winata',
-            'photoProfile' => '/images/faces/face3.jpg',
-            'role' => 'admin'
-        );
+        $this->data['page'] = 'Program';
     }
 
     public function index()

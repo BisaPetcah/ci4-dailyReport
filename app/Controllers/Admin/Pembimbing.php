@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controllers\Admin;
-
 
 use App\Controllers\BaseController;
 
@@ -15,12 +13,7 @@ class Pembimbing extends BaseController
      */
     public function __construct()
     {
-        $this->data = array(
-            'page' => 'Pembimbing',
-            'name' => 'Arief Yusuf Winata',
-            'photoProfile' => '/images/faces/face3.jpg',
-            'role' => 'admin'
-        );
+        $this->data['page'] = 'Pembimbing';
     }
 
     public function index()
