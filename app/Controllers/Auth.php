@@ -17,13 +17,13 @@ class Auth extends BaseController
         $post = $this->request->getVar();
 
         if (!$this->validate($this->validation->getRuleGroup('masuk'))) {
-            return redirect()->to('/')->withInput()->with('validation', $this->validation);
+            return redirect()->to('/')->with('validation', $this->validation);
         }
 
         if (isset($post['masuk'])) {
             $user = $this->userModel->getUser($post['username']);
             if ($user) {
-                if ($post['password'] == $user['user_password']) {
+                if (password_verify($post['password'], $user['user_password'])) {
                     $data = array(
                         'user_id' => $user['user_id'],
                         'profile_name' => $user['profile_nama'],
@@ -36,6 +36,7 @@ class Auth extends BaseController
                 }
             }
         }
+        return redirect()->to('/');
     }
 
     public function registerAdmin()
@@ -58,8 +59,9 @@ class Auth extends BaseController
         if (isset($post['daftar'])) {
             $data = array(
                 'nama' => $post['nama'],
+                'username' => $post['username'],
                 'email' => $post['email'],
-                'password' => $post['password'],
+                'password' => password_hash($post['password'], PASSWORD_DEFAULT),
                 'jenisKelamin' => $post['jenis_kelamin'],
                 'noHp' => $post['noHp'],
                 'alamat' => $post['alamat'],
@@ -68,8 +70,11 @@ class Auth extends BaseController
             $id_user = $this->userModel->createUserAdmin($data);
             $data['userid'] = $id_user;
 
-            $this->profileModel->createProfile($data);
-
+            if (!$this->profileModel->createProfile($data)) {
+                session()->setFlashdata('pesan', 'Akun gagal dibuat');
+                return redirect()->to('/');
+            }
+            session()->setFlashdata('pesan', 'Akun berhasil dibuat');
             return redirect()->to('/');
         }
     }

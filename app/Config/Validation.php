@@ -6,6 +6,7 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
+use App\Validation\MyRules;
 
 class Validation
 {
@@ -24,6 +25,7 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
+        MyRules::class,
     ];
 
     /**
@@ -54,10 +56,10 @@ class Validation
     public $daftar = [
         'nama' => [
             'label' => 'Nama',
-            'rules' => 'required|alpha_space',
+            'rules' => 'required|string|regex_match[/^08\d{9,12}$/]',
             'errors' => [
                 'required' => '{field} harus diisi',
-                'alpha_space' => '{field} harus huruf dan spasi',
+                'alpha_numeric_punct' => '{field} harus huruf, spasi dan simbol',
             ],
         ],
         'email' => [
@@ -69,9 +71,17 @@ class Validation
                 'valid_email' => 'Format email tidak sesuai',
             ],
         ],
+        'username' => [
+            'label' => 'Username',
+            'rules' => 'required|is_unique[m_user.user_username]|alpha_numeric',
+            'errors' => [
+                'required' => '{field} harus diisi',
+                'is_unique' => '{field} sudah ada',
+            ],
+        ],
         'password' => [
             'label' => 'Password',
-            'rules' => 'required|min_length[8]',
+            'rules' => 'required|min_length[3]',
             'errors' => [
                 'required' => '{field} harus diisi',
                 'min_length' => '{field} harus {param} karakter',
@@ -126,8 +136,8 @@ class Validation
 
     public $masuk = [
         'username' => [
-            'rules' => 'required|is_not_unique[m_user.user_email]|valid_email',
-            'label' => 'Email',
+            'rules' => 'required|checkAccount',
+            'label' => 'Username',
             'errors' => [
                 'required' => 'Harap masukkan {field}',
                 'is_not_unique' => '{field} tidak terdaftar',

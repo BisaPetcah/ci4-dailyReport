@@ -6,7 +6,7 @@ namespace App\Models;
 
 class UserModel extends \CodeIgniter\Model
 {
-    protected $table = 'm_user';
+    protected $table = 'm_user as u';
     protected $primaryKey = 'user_id';
     protected $allowedFields = array(
         'user_email',
@@ -23,15 +23,19 @@ class UserModel extends \CodeIgniter\Model
 //        ))->first();
         return $this
             ->select(array(
-                'm_user.user_id',
-                'm_profile.profile_nama',
-                'm_user.user_email',
-                'm_user.user_password',
-                'm_user.user_roleid',
-                'm_profile.profile_foto',
+                'u.user_id',
+                'p.profile_nama',
+                'u.user_email',
+                'u.user_password',
+                'u.user_roleid',
+                'p.profile_foto',
             ))
-            ->join('m_profile', 'm_profile.profile_userid = m_user.user_id')
-            ->where(['m_user.user_email' => $username])
+            ->join('m_profile as p', 'p.profile_userid = u.user_id')
+            ->orWhere([
+                'u.user_email' => $username,
+                'u.user_username' => $username,
+            ])
+//            ->getCompiledSelect();
             ->first();
 //        return $this
 //            ->select(array(
@@ -52,6 +56,7 @@ class UserModel extends \CodeIgniter\Model
     {
         $data = array(
             'user_email' => $post['email'],
+            'user_username' => $post['username'],
             'user_password' => $post['password'],
             'user_isActive' => 1,
             'user_roleid' => 1
@@ -64,6 +69,7 @@ class UserModel extends \CodeIgniter\Model
     {
         $data = array(
             'user_email' => $post['email'],
+            'user_username' => $post['username'],
             'user_password' => $post['password'],
             'user_isActive' => 1,
             'user_roleid' => 2
@@ -76,6 +82,7 @@ class UserModel extends \CodeIgniter\Model
     {
         $data = array(
             'user_email' => $post['email'],
+            'user_username' => $post['username'],
             'user_password' => $post['password'],
             'user_isActive' => 1,
             'user_roleid' => 3

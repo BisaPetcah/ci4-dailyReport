@@ -29,7 +29,7 @@
                         <h4>Registrasi Admin</h4>
                         <!-- Awal Form Register -->
                         <form method="POST" enctype="multipart/form-data" class="pt-3">
-			<?= csrf_field() ?>
+                            <?= csrf_field() ?>
                             <div class="form-group">
                                 <input type="text"
                                        class="form-control form-control-lg <?= $validation->hasError('nama') ? 'is-invalid' : '' ?>"
@@ -37,6 +37,15 @@
                                        placeholder="Nama Lengkap" name="nama" value="<?= old('nama') ?>">
                                 <div class="invalid-feedback">
                                     <?= $validation->getError('nama') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"
+                                       class="form-control form-control-lg <?= $validation->hasError('username') ? 'is-invalid' : '' ?>"
+                                       id="username"
+                                       placeholder="Username" name="username" value="<?= old('username') ?>">
+                                <div class="invalid-feedback">
+                                    <?= $validation->getError('username') ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -52,7 +61,7 @@
                                 <input type="password"
                                        class="form-control form-control-lg <?= $validation->hasError('password') ? 'is-invalid' : '' ?>"
                                        id="password"
-                                       placeholder="Password" name="password" value="<?= old('password') ?>">
+                                       placeholder="Password" name="password">
                                 <div class="invalid-feedback">
                                     <?= $validation->getError('password') ?>
                                 </div>
@@ -61,8 +70,7 @@
                                 <input type="password"
                                        class="form-control form-control-lg <?= $validation->hasError('pass_confirm') ? 'is-invalid' : '' ?>"
                                        id="password2"
-                                       placeholder="Konfirmasi Password" name="pass_confirm"
-                                       value="<?= old('pass_confirm') ?>">
+                                       placeholder="Konfirmasi Password" name="pass_confirm">
                                 <div class="invalid-feedback">
                                     <?= $validation->getError('pass_confirm') ?>
                                 </div>
@@ -73,8 +81,8 @@
                                         name="jenis_kelamin" id="jenis-kelamin">
                                     <option value="" selected disabled>Pilih Jenis Kelamin</option>
                                     <?php $jk = array('Laki-laki', 'Perempuan') ?>
-                                    <?php foreach ($jk as $jk_value) : ?>
-                                        <option value="<?= $jk_value ?>" <?= old('jenis_kelamin') == $jk_value? 'selected': '' ?>><?= $jk_value ?></option>
+                                    <?php foreach ($jk as $jk_value): ?>
+                                        <option value="<?= $jk_value ?>" <?= old('jenis_kelamin') == $jk_value ? 'selected' : '' ?>><?= $jk_value ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <div class="invalid-feedback">

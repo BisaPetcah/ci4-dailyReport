@@ -30,13 +30,13 @@
                         <form action="" method="POST" class="pt-3">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg <?=$validation->hasError('username') ? 'is-invalid' : ''?>" id="username"
-                                       placeholder="Email" name="username" value="<?=old('username')?>">
+                                       placeholder="Username" name="username">
                                        <div class="invalid-feedback">
                                            <?=$validation->getError('username')?>
                                        </div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control form-control-lg <?=$validation->hasError('username') ? 'is-invalid' : ''?>" id="password"
+                                <input type="password" class="form-control form-control-lg <?=$validation->hasError('password') ? 'is-invalid' : ''?>" id="password"
                                        placeholder="Password" name="password">
                                        <div class="invalid-feedback">
                                            <?=$validation->getError('password')?>
